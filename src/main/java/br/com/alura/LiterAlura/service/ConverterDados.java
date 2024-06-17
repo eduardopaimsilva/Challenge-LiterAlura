@@ -3,7 +3,7 @@ package br.com.alura.LiterAlura.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ConverteDados implements IConverteDados {
+public class ConverterDados implements  IConverterDados {
 
     private ObjectMapper mapper = new ObjectMapper();
 

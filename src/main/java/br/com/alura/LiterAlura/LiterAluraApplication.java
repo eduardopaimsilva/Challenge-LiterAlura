@@ -1,15 +1,23 @@
 package br.com.alura.LiterAlura;
 
-import br.com.alura.LiterAlura.model.DadosLivro;
+import br.com.alura.LiterAlura.principal.Principal;
+import br.com.alura.LiterAlura.repository.AutorRepository;
+import br.com.alura.LiterAlura.repository.LivroRepository;
 import br.com.alura.LiterAlura.service.ConsumoApi;
-import br.com.alura.LiterAlura.service.ConverteDados;
+import br.com.alura.LiterAlura.service.ConverterDados;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cglib.core.Converter;
 
 @SpringBootApplication
 public class LiterAluraApplication implements CommandLineRunner {
+
+	@Autowired
+	private LivroRepository livroRepository;
+
+	@Autowired
+	private AutorRepository autorRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LiterAluraApplication.class, args);
@@ -17,11 +25,7 @@ public class LiterAluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var consumoApi = new ConsumoApi();
-		 var json = consumoApi.obterDados("https://gutendex.com/books/");
-		System.out.println(json);
-		ConverteDados conversor = new ConverteDados();
-		DadosLivro dados = conversor.obterDados(json, DadosLivro.class);
-		System.out.println(dados);
+		Principal principal = new Principal(livroRepository, autorRepository);
+		principal.menu();
 	}
 }
